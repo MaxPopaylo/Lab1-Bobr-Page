@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Попайло Максим</title>
+</head>
+<body>
+    <nav class="menu-container">
+        <label class="page-title">BOBER'S and anouther HTML</label>
+        <ul class="menu">
+          <li><a class="active" href="#" onclick="changeImage('img/bobr1.png')">BATYA BOBER</a></li>
+          <li><a href="#" onclick="changeImage('img/bobr2.png')">NAZIK BOBER</a></li>
+          <li><a href="#" onclick="changeImage('img/bobr3.png')">ANDRIY BOBER</a></li>
+          <li><a href="#" onclick="changeImage('img/bobr4.png')">VOVA BOBER</a></li>
+          <li><a href="#" onclick="changeImage('img/bobr5.png')">HZ HTO BOBER</a></li>
+        </ul>
+    </nav>
+
+      <div class="main-container">
+        <div class="img-container" >
+            <img id="img" class="bobr-img" src="img/bobr1.png">
+        </div>
+        <div class="text-container">
+            <a href="#"><h1>Заголовок1</h1></a>
+            <h2>Заголовок2</h2>
+            <h3>Заголовок3</h3>
+            <p>Теееееееееееееееееееееееееееееееееееееееексе</p>
+            <p>&ordm&ordm&ordm&ordm&ordm&ordm&ordm&ordm&ordm&ordm&ordm</p>
+        </div>
+        <div class="table-container">
+            <h1>TABLE</h1>
+            <table>
+                <tr>
+                    <td>col 1</td>
+                    <td>col 2</td>
+                </tr>
+            </table>
+        </div>
+        <div class="list-container">
+            <h2>LIST'S</h2>
+            <div class="ul-list">
+                <h3>UL LIST</h3>
+                <ul>
+                    <li>UL LIST 1</li>
+                    <li>UL LIST 2</li>
+                    <li>UL LIST 3</li>
+                  </ul>
+            </div>
+            <div class="ol-list">
+                <h3>OL LIST</h3>
+                <ol>
+                    <li>OL 1</li>
+                    <li>OL 2</li>
+                    <li>OL 3</li>
+                  </ol>
+            </div>
+            <div class="dl-list">
+                <h3>DL LIST</h3>
+                <dl>
+                    <dt>DT 1</dt>
+                    <dd>DD 1</dd>
+                    <dt>DT 2</dt>
+                    <dd>DD 2</dd>
+                    <dt>DT 3</dt>
+                    <dd>DD 3</dd>
+                  </dl>
+            </div>
+            <div class="forms_container">
+                <form>
+                    <h1>TEXT</h1>
+                    <label for="text">Text Field:</label><br>
+                    <input type="text" id="text" name="text"><br><br>
+                  
+                    <h1>PASSWORD</h1>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password"><br><br>
+                  
+                    <h1>EMAIL</h1>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email"><br><br>
+                  
+                    <h1>NUMBER</h1>
+                    <label for="number">Number:</label><br>
+                    <input type="number" id="number" name="number"><br><br>
+                  
+                    <h1>DATA</h1>
+                    <label for="date">Date:</label><br>
+                    <input type="date" id="date" name="date"><br><br>
+                  
+                    <h1>TIME</h1>
+                    <label for="time">Time:</label><br>
+                    <input type="time" id="time" name="time"><br><br>
+                  
+                    <h1>FILE</h1>
+                    <label for="file">File:</label><br>
+                    <input type="file" id="file" name="file"><br><br>
+                  
+                    <h1>CHECKBOX</h1>
+                    <input type="checkbox" id="checkbox" name="checkbox" value="checkbox">
+                    <label for="checkbox">Checkbox</label><br><br>
+                  
+                    <h1>RADIOBUTTON</h1>
+                    <input type="radio" id="radio" name="radio" value="radio">
+                    <label for="radio">Radio Button</label><br><br>
+                  
+                    <h1>SELECT</h1>
+                    <label for="select">Select:</label><br>
+                    <select id="select" name="select">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select><br><br>
+                  
+                    <h1>BUTTON</h1>
+                    <input type="submit" value="Submit">
+                  </form>
+            </div>
+        </div>
+
+        <script>
+            function changeImage(imagePath) {
+                 var img = document.getElementById('img');
+                 img.src = imagePath;
+
+                 var menuItems = document.querySelectorAll('.menu li a');
+                 menuItems.forEach(function(item) {
+                   item.classList.remove('active');
+                });
+
+                event.target.classList.add('active');
+            }
+        </script>
+</body>
+</html>

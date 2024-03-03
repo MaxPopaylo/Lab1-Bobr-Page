@@ -1,0 +1,121 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+  }
+  body{
+    font-family: montserrat;
+    background-color: rgb(224, 197, 197);
+  }
+  nav{
+    background: #0082e6;
+    height: 80px;
+    width: 100%;
+  }
+  label.page-title{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+  }
+  nav ul{
+    float: right;
+    margin-right: 20px;
+  }
+  nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+  }
+  nav ul li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  a.active,a:hover{
+    background: #1b9bff;
+    transition: .5s;
+  }
+  
+  @media (max-width: 600px) {
+    nav ul {
+      float: none;
+      margin-right: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: block;
+      line-height: normal;
+      margin: 5px 0;
+    }
+    nav ul li a {
+      padding: 5px 10px;
+    }
+
+    .main-container {
+      padding-top: 150px; 
+    }
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .img-container {
+    margin-top: 150px;
+  }
+ 
+  .bobr-img {
+    border: 6px solid black;
+    border-radius: 25px;
+    width: 10000%;
+    height: auto;
+    max-width: 700px;
+  }
+
+  .text-container {
+    padding: 15px;
+    border: 3px solid blue;
+    height: 300px;
+    margin-top: 150px;
+  }
+
+  .table-container {
+    margin-left: 15px;
+    padding: 15px;
+    border: 5px solid rgb(0, 255, 221);
+    height: 150px;
+    margin-top: 150px;
+  }
+
+  .list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 450px;
+}
+
+.ul-list,
+.ol-list,
+.dl-list {
+    padding: 15px;
+    border: 5px solid rgb(0, 255, 221);
+    margin-right: 20px;
+}
+
+.forms-container {
+    margin-left: 15px;
+    padding: 15px;
+    border: 5px solid rgb(255, 0, 242);
+    height: 500px;
+    margin-top: 150px;
+}
+
