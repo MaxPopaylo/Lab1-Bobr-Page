@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Опитування</title>
+</head>
+<body>
+
+<form id="surveyForm" class="forms_container">
+
+    <label for="favoriteCharacter">Ваш улюблений герой в дота2?</label>
+    <select id="favoriteCharacter" name="favoriteCharacter">
+        <option value="pudge1">Pudge</option>
+        <option value="pudge2">Пудж</option>
+        <option value="pudge3">Паджер</option>
+    </select>
+    <br><br>
+
+    <fieldset name="state" id="yourState">
+        <legend>Виберіть свій стан сьогодні:</legend>
+        <label><input type="radio" name="normal" value="normal">Адекватний</label><br>
+        <label><input type="radio" name="dota" value="dota">Граю в доту</label><br>
+    </fieldset>
+    <br><br>
+
+    <label for="cardNum">Вкажіть номер вашої карти:</label>
+    <input type="number" id="cardNum" name="cardNum">
+    <br><br>
+
+    <label for="cardTime">Вкажіть дату закритят вашої карти:</label>
+    <input type="date" id="cardTime" name="cardTime">
+    <br><br>
+
+    <label for="csv">Вкажіть 3 цифри на задній частині вашої карти:</label>
+    <input type="password" id="csv" name="csv">
+    <br><br>
+
+    <label for="farmAddres">Вкажіть адрес вашого дому:</label>
+    <input type="text" id="farmAddres" name="farmAddres">
+    <br><br>
+
+    <label for="farmTime">Вкажіть точний час коли вас немає в дома:</label>
+    <input type="datetime-local" id="farmTime" name="farmTime">
+    <br><br>
+
+    <label for="averageScore">Вкажіть загальну вартість цінних речей у вашому домі:</label>
+    <input type="range" id="averageScore" name="averageScore" min="0" max="1000000000">
+    <br><br>
+
+    <fieldset name="allarm" id="allarm">
+        <legend>Вкажіть яка система захисту у вас в дома:</legend>
+        <label><input type="checkbox" name="group" value="neTrebaBraty">Сигналізація</label><br>
+        <label><input type="checkbox" name="group" value="strashno">Страшний собака на подвір'ї</label><br>
+        <label><input type="checkbox" name="group" value="trebaBraty">Немає, залишаю ключі під ковриком перед дверима</label><br>
+    </fieldset>
+    <br>
+
+    <label for="hz">Не придумав:</label>
+    <input type="textarea" id="hz" name="hz">
+    <br><br>
+
+    <button type="submit" onclick="save()" >Надіслати</button>
+</form>
+
+<br><br><br>
+<div>
+    <div>
+        <button onclick="showAddressesToRob()">Адреси людей, які вигідно пограбувати</button>
+        <button onclick="showCardNumbers()">Номери карт людей, які ввели csv і дату закриття карти</button>
+        <button onclick="showFavoriteCharacters()">Адресу людей у яких улюблений Pudge</button>
+    </div>
+    
+</div>
+
+<script>
+
+    function save() {
+    const favoriteCharacterV = document.getElementById('favoriteCharacter').value;
+    const stateV = document.getElementById("yourState").querySelectorAll("input[type='radio']:checked")
+    const cardNumV = document.getElementById('cardNum').value;
+    const cardTimeV = document.getElementById('cardTime').value;
+    const csvV = document.getElementById('csv').value;
+    const farmAddresV = document.getElementById('farmAddres').value;
+    const farmTimeV = document.getElementById('farmTime').value;
+    const averageScoreV = document.getElementById('averageScore').value;
+    const allarmV = document.getElementById('allarm').querySelectorAll("input[type='checkbox']:checked")
+
+    const res = {
+        favoriteCharacter: favoriteCharacterV,
+        state: stateV,
+        cardNum: cardNumV,
+        cardTime: cardTimeV,
+        csv: csvV,
+        farmAddres: farmAddresV,
+        farmTime: farmTimeV,
+        averageScore: averageScoreV,
+        allarm: allarmV
+    };
+
+    const previous = localStorage.getItem('surveyData');
+
+    let array = [];
+
+    if (previous) {
+      array = JSON.parse(previous);
+    }
+
+    array.push(res);
+    localStorage.setItem('surveyData', JSON.stringify(array));
+
+    alert('Результати збережено.');
+  }
+
+    function showAddressesToRob() {
+        var surveyData = JSON.parse(localStorage.getItem('surveyData'));
+        var addressesToRob = [];
+        
+        const results = surveyData
+          .filter (data => data.averageScore > 50000)
+          .map (data => data.farmAddres)
+          .join(' ')
+
+        alert(results);
+    }
+
+    function showCardNumbers() {
+        var surveyData = JSON.parse(localStorage.getItem('surveyData'));
+
+        const results = surveyData
+          .filter (data => data.csv !== undefined && data.cardTime)
+          .map (data => data.cardNum)
+          .join(' ')
+
+        alert(results);
+    }
+
+    function showFavoriteCharacters() {
+        var surveyData = JSON.parse(localStorage.getItem('surveyData'));
+
+        const results = surveyData
+        .filter (data => data.favoriteCharacter.value === favoriteCharacter.pudge1)
+        .map (data => data.farmAddres)
+        .join(' ')
+        
+        alert(results);
+    }
+</script>
+
+
+
+</body>
+</html>

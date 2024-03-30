@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dota Quiz</title>
+</head>
+<body>
+    <section class="et-slide" id="form-container">
+        <div class="text-left" id="quiz-container">
+
+        </div>
+    </section>
+    <script>
+
+        testData = {
+  "testName": "Dota enjoyer test",
+  "questions": [
+    {
+      "question": "Без чого не можна грати на такому герої як Spirit Braker?",
+      "answers": [
+        {
+          "answer": "Без пива",
+          "isCorrect": true
+        },
+        {
+          "answer": "Без мишки",
+          "isCorrect": false
+        },
+        {
+          "answer": "Без комп'ютера",
+          "isCorrect": false
+        },
+        {
+          "answer": "Без гри",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "question": "Топ 1 айтем на Anti Mage?",
+      "answers": [
+        {
+          "answer": "Radiance",
+          "isCorrect": true
+        },
+        {
+          "answer": "Manta Style",
+          "isCorrect": false
+        },
+        {
+          "answer": "Batel Fury",
+          "isCorrect": false
+        },
+        {
+          "answer": "Eye of skady",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "question": "Що робити в першу чергу новачку в Dota2?",
+      "answers": [
+        {
+          "answer": "Видалити і ніколи не скачувати",
+          "isCorrect": true
+        },
+        {
+          "answer": "Почати вчити механіки",
+          "isCorrect": false
+        },
+        {
+          "answer": "Почати вивчати айтеми в магазині",
+          "isCorrect": false
+        },
+        {
+          "answer": "Запустити пошук гри",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "question": "Основна помилка сапортів в Dota2?",
+      "answers": [
+        {
+          "answer": "Запускати гру",
+          "isCorrect": true
+        },
+        {
+          "answer": "Не купляти варди",
+          "isCorrect": false
+        },
+        {
+          "answer": " Не помагати кору",
+          "isCorrect": false
+        },
+        {
+          "answer": "Не купляти сейв айтеми",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "question": "Для чого вигравати в Dota2",
+      "answers": [
+        {
+          "answer": "Щоб мама похвалила",
+          "isCorrect": true
+        },
+        {
+          "answer": "Щоб рейтинг піднімати",
+          "isCorrect": false
+        },
+      ]
+    }
+  ]
+}
+
+
+const quizContainer = document.getElementById('quiz-container');
+
+function renderQuiz(testData) {
+    const quizQuestions = testData.questions;
+
+    const quizForm = document.createElement('form');
+    quizForm.setAttribute('id', 'quiz-form');
+
+    quizQuestions.forEach((questionObj, questionIndex) => {
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('question');
+        questionElement.innerHTML = `<p>${questionIndex + 1}. ${questionObj.question}</p>`;
+
+        const answers = questionObj.answers;
+        answers.forEach((answerObj, answerIndex) => {
+            const answerElement = document.createElement('div');
+            answerElement.classList.add('answer');
+            answerElement.innerHTML = `
+                <input type="radio" id="question${questionIndex}-answer${answerIndex}" name="question${questionIndex}" value="${answerObj.answer}">
+                <label for="question${questionIndex}-answer${answerIndex}">${answerObj.answer}</label>
+            `;
+            questionElement.appendChild(answerElement);
+        });
+
+        quizForm.appendChild(questionElement);
+    });
+
+    const submitButton = document.createElement('button');
+    submitButton.setAttribute('type', 'submit');
+    submitButton.textContent = 'Submit';
+    quizForm.appendChild(submitButton);
+
+    quizForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        let correctAnswersCount = 0;
+
+        quizQuestions.forEach((questionObj, questionIndex) => {
+            const selectedAnswer = document.querySelector(`input[name="question${questionIndex}"]:checked`);
+            if (selectedAnswer) {
+                const selectedAnswerIndex = parseInt(selectedAnswer.id.split('-')[1].replace('answer', ''));
+                if (questionObj.answers[selectedAnswerIndex].isCorrect) {
+                    correctAnswersCount++;
+                }
+            }
+        });
+
+        const totalQuestionsCount = quizQuestions.length;
+        const scorePercentage = (correctAnswersCount / totalQuestionsCount) * 100;
+
+        const resultMessage = `Співчуваю, ви на (${scorePercentage}%) дотер.`;
+
+        quizContainer.innerHTML = '';
+
+        const resultElement = document.createElement('div');
+        resultElement.textContent = resultMessage;
+
+        quizContainer.appendChild(resultElement);
+    });
+
+    quizContainer.innerHTML = '';
+    quizContainer.appendChild(quizForm);
+}
+
+renderQuiz(testData);
+
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
