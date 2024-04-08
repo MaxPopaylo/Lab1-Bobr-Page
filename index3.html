@@ -153,16 +153,18 @@ function renderQuiz(testData) {
     quizForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        let correctAnswersCount = 0;
+        let correctAnswersCount = 0
+
+        const formData = new FormData(quizForm);
 
         quizQuestions.forEach((questionObj, questionIndex) => {
-            const selectedAnswer = document.querySelector(`input[name="question${questionIndex}"]:checked`);
-            if (selectedAnswer) {
-                const selectedAnswerIndex = parseInt(selectedAnswer.id.split('-')[1].replace('answer', ''));
-                if (questionObj.answers[selectedAnswerIndex].isCorrect) {
-                    correctAnswersCount++;
-                }
+        const selectedAnswer = formData.get(`question${questionIndex}`);
+         if (selectedAnswer) {
+             const correctAnswer = questionObj.answers.find(answer => answer.isCorrect);
+             if (correctAnswer.answer === selectedAnswer) {
+                  correctAnswersCount++;
             }
+        }
         });
 
         const totalQuestionsCount = quizQuestions.length;
@@ -182,8 +184,7 @@ function renderQuiz(testData) {
     quizContainer.appendChild(quizForm);
 }
 
-renderQuiz(testData);
-
+renderQuiz(testData)
 
 
 

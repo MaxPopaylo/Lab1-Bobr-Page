@@ -21,8 +21,8 @@ var crashed = false;
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = 600;
+        this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -106,6 +106,13 @@ function updateGameArea() {
             if (myObstacles[i] instanceof bonus) {
                 myObstacles.splice(i, 1);
                 myGameArea.frameNo += 1000; 
+
+                var cuurenWidth = myGamePiece.width
+                var currentHeight = myGamePiece.height
+
+                myGamePiece.width = cuurenWidth + 5
+                myGamePiece.height = currentHeight + 5
+
             } else {
                 showRestartButton();
                 myGameArea.stop();
